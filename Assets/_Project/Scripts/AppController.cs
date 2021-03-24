@@ -1,3 +1,4 @@
+using NatSuite.Sharing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,6 +54,17 @@ public class AppController : MonoBehaviour
             videoPlayerIndex++;
 
         FindVideoPlayer();
+    }
+
+    public void GetScreenshot()
+    {
+        Texture2D screenshot = ScreenCapture.CaptureScreenshotAsTexture();
+        SharePayload payloadShare = new SharePayload();
+        SavePayload payloadSave = new SavePayload();
+        payloadShare.AddImage(screenshot);
+        payloadSave.AddImage(screenshot);
+        payloadShare.Commit();
+        payloadSave.Commit();
     }
 
     #endregion
